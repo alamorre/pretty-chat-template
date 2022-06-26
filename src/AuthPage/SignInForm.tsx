@@ -1,11 +1,43 @@
+import { useState } from "react";
+
+import axios from "axios";
+
 import { useIsMobile } from "../hooks/isMobile";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 
-interface SignInFormProps {}
+const PRIVATE_KEY: string = process.env.REACT_APP_PROJECT_KEY
+  ? process.env.REACT_APP_PROJECT_KEY
+  : "";
 
-const SignInForm = (props: SignInFormProps) => {
+const SignInForm = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const isMobile: boolean = useIsMobile();
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const data = {
+      first_name: firstName,
+      last_name: lastName,
+      username: email,
+      email: email,
+      secret: password,
+    };
+    const headers = {
+      "Private-Key": PRIVATE_KEY,
+    };
+
+    axios
+      .post("https://api.chatengine.io/users/", data, {
+        headers,
+      })
+      .then((r) => console.log(r))
+      .catch((e) => console.log("Error", e));
+  };
 
   return (
     <div>
@@ -41,12 +73,13 @@ const SignInForm = (props: SignInFormProps) => {
         </span>
       </div>
 
-      <form>
+      <form onSubmit={onSubmit}>
         <TextInput
           label="First name"
           name="first_name"
           placeholder="Adam"
           style={{ width: isMobile ? "100%" : "calc(50% - 6px)" }}
+          onChange={(e) => setFirstName(e.target.value)}
         />
 
         <TextInput
@@ -57,15 +90,22 @@ const SignInForm = (props: SignInFormProps) => {
             width: isMobile ? "100%" : "calc(50% - 6px)",
             float: "right",
           }}
+          onChange={(e) => setLastName(e.target.value)}
         />
 
-        <TextInput label="Email" name="email" placeholder="adam@lamorre.co" />
+        <TextInput
+          label="Email"
+          name="email"
+          placeholder="adam@lamorre.co"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
         <TextInput
           label="Password"
           name="password"
           placeholder="********"
           type="password"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <Button type="submit">Submit</Button>

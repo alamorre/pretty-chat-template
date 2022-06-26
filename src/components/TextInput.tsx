@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties, ChangeEventHandler } from "react";
 
 interface TextInputProps {
   label: string;
@@ -6,6 +6,7 @@ interface TextInputProps {
   type?: string;
   placeholder?: string;
   style?: CSSProperties;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const TextInput = (props: TextInputProps) => {
@@ -23,6 +24,7 @@ const TextInput = (props: TextInputProps) => {
         name={props.name}
         placeholder={props.placeholder}
         style={styles.inputStyle}
+        onChange={props.onChange}
       />
     </div>
   );
