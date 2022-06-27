@@ -1,9 +1,12 @@
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 
 import valley from "../assets/valley.jpeg";
-import SignInForm from "./SignInForm";
+import SignInForm from "./SignUpForm";
+import LogInForm from "./LogInForm";
 
 const AuthPage = () => {
+  const [hasAccount, setHasAccount] = useState(false);
+
   const backgroundStyle = {
     width: "100vw",
     height: "100vh",
@@ -22,7 +25,11 @@ const AuthPage = () => {
 
             <div style={{ height: "11vw" }} />
 
-            <SignInForm />
+            {hasAccount ? (
+              <LogInForm onSignUp={() => setHasAccount(false)} />
+            ) : (
+              <SignInForm onLogIn={() => setHasAccount(true)} />
+            )}
           </div>
         </div>
       </div>
