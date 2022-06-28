@@ -1,16 +1,18 @@
 import { CSSProperties, ReactNode, useState } from "react";
 
-interface ButtonProps {
+interface LinkProps {
   children?: ReactNode;
   style?: CSSProperties;
   type?: string;
+  onClick?: () => void;
 }
 
-const Button = (props: ButtonProps) => {
+const Link = (props: LinkProps) => {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <button
+    <span
+      onClick={props?.onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -20,26 +22,22 @@ const Button = (props: ButtonProps) => {
       }}
     >
       {props.children}
-    </button>
+    </span>
   );
 };
 
 const styles = {
   style: {
-    width: "100%",
-    height: "53px",
-    color: "white",
-    backgroundColor: "#fa541c",
-    border: "none",
-    outline: "none",
-    borderRadius: "8px",
-    fontFamily: "VisbyRoundCF-DemiBold",
+    color: "#fa541c",
     cursor: "pointer",
     transition: "all .44s ease",
     WebkitTransition: "all .44s ease",
     MozTransition: "all .44s ease",
   } as CSSProperties,
-  hoverStyle: { filter: "brightness(145%)" } as CSSProperties,
+  hoverStyle: {
+    filter: "brightness(145%)",
+    textDecoration: "underline",
+  } as CSSProperties,
 };
 
-export default Button;
+export default Link;

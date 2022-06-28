@@ -1,6 +1,6 @@
 import { CSSProperties, ChangeEventHandler, useState } from "react";
 
-interface TextInputProps {
+interface PhotoInputProps {
   label: string;
   id: string;
   name: string;
@@ -9,7 +9,7 @@ interface TextInputProps {
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-const PhotoInput = (props: TextInputProps) => {
+const PhotoInput = (props: PhotoInputProps) => {
   const [selectedImage, setSelectedImage] = useState<File | undefined>(
     undefined
   );

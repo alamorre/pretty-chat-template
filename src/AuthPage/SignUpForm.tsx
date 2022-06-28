@@ -3,11 +3,12 @@ import { CSSProperties, useContext, useState } from "react";
 import axios from "axios";
 
 import { useIsMobile } from "../hooks/isMobile";
+import { Context, User } from "../hooks/context";
+
 import TextInput from "../components/TextInput";
 import PhotoInput from "../components/PhotoInput";
 import Button from "../components/Button";
-
-import { Context, User } from "../hooks/context";
+import Link from "../components/Link";
 
 const PRIVATE_KEY: string = process.env.REACT_APP_PROJECT_KEY
   ? process.env.REACT_APP_PROJECT_KEY
@@ -28,8 +29,6 @@ const SignUpForm = (props: SignUpFormProps) => {
   const { setUser } = useContext(Context);
   // Hooks
   const isMobile: boolean = useIsMobile();
-
-  const onAvatarChange = (files: FileList | null) => {};
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,10 +73,7 @@ const SignUpForm = (props: SignUpFormProps) => {
       <div style={styles.titleStyle}>Create an account</div>
 
       <div style={styles.subtitleStyle}>
-        Already a member?{" "}
-        <span style={styles.linkStyle} onClick={() => props.onLogIn()}>
-          Log in
-        </span>
+        Already a member? <Link onClick={() => props.onLogIn()}>Log in</Link>
       </div>
 
       <form onSubmit={onSubmit}>
@@ -160,10 +156,6 @@ const styles = {
     letterSpacing: "0.5px",
     color: "#afafaf",
     paddingBottom: "24px",
-  } as CSSProperties,
-  linkStyle: {
-    color: "#fa541c",
-    cursor: "pointer",
   } as CSSProperties,
 };
 

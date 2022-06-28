@@ -4,6 +4,7 @@ import axios from "axios";
 
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
+import Link from "../components/Link";
 
 import { Context, User } from "../hooks/context";
 
@@ -53,10 +54,7 @@ const LogInForm = (props: LogInFormProps) => {
       <div style={styles.titleStyle}>Welcome Back</div>
 
       <div style={styles.subtitleStyle}>
-        New here?{" "}
-        <span style={styles.linkStyle} onClick={() => props.onSignUp()}>
-          Sign Up
-        </span>
+        New here? <Link onClick={() => props.onSignUp()}>Sign Up</Link>
       </div>
 
       <form onSubmit={onSubmit}>
@@ -95,10 +93,6 @@ const styles = {
     letterSpacing: "0.5px",
     color: "#afafaf",
     paddingBottom: "24px",
-  } as CSSProperties,
-  linkStyle: {
-    color: "#fa541c",
-    cursor: "pointer",
   } as CSSProperties,
 };
 
