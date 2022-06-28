@@ -30,7 +30,7 @@ const LogInForm = (props: LogInFormProps) => {
     };
 
     axios
-      .get("https://api.chatengine.io/users/me/", {
+      .get("http://127.0.0.1:8000/users/me/", {
         headers,
       })
       .then((r) => {
