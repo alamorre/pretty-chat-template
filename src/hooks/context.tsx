@@ -14,6 +14,14 @@ export interface ContextInterface {
   setUser: (u: User) => void;
 }
 
+const defaultUser: User = {
+  email: "adam@lamorre.co",
+  username: "adam@lamorre.co",
+  first_name: "Adam",
+  last_name: "La Morre",
+  secret: "Pass1234!",
+};
+
 export const Context = createContext<ContextInterface>({
   user: undefined,
   setUser: () => {},
@@ -24,7 +32,8 @@ interface ContextProps {
 }
 
 export const ContextProvider = (props: ContextProps) => {
-  const [user, setUser] = useState<User>();
+  // TODO: Switch default back to (undefined)
+  const [user, setUser] = useState<User>(defaultUser);
 
   const value = {
     user,

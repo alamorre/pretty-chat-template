@@ -57,7 +57,7 @@ const SignUpForm = (props: SignUpFormProps) => {
     };
 
     axios
-      .post("http://127.0.0.1:8000/users/", formData, {
+      .post("https://api.chatengine.io/users/", formData, {
         headers,
       })
       .then((r) => {
