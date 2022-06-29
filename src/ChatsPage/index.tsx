@@ -20,8 +20,6 @@ const ChatsPage = () => {
   const secret = user ? user.secret : "";
 
   const chatProps = useMultiChatLogic(projectId, username, secret);
-  chatProps.httpUrl = "https://api.chatengine.io";
-  chatProps.wsUrl = "wss://api.chatengine.io";
 
   return (
     <div>
