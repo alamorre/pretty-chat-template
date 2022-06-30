@@ -10,7 +10,6 @@ const AuthPage = () => {
   const backgroundStyle = {
     width: "100vw",
     height: "100vh",
-    backgroundColor: "red",
     backgroundImage: `url(${valley})`, // Here due to variable
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",

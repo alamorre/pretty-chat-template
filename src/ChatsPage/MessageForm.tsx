@@ -1,70 +1,90 @@
 import { CSSProperties, useState } from "react";
 
-// TODO: import { MessageFormProps } from 'react-chat-engine-advanced'
+import { MessageObject, MessageFormProps } from "react-chat-engine-advanced";
 
-const MessageForm = (props: any) => {
+const MessageForm = (props: MessageFormProps) => {
   const [text, setText] = useState<string>("");
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("event", text);
+
+    if (text.trim().length === 0) {
+      return;
+    }
+
+    setText("");
+    const created = new Date()
+      .toISOString()
+      .replace("T", " ")
+      .replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
+
+    const message: MessageObject = {
+      text: text,
+      sender_username: "adam@lamorre.co",
+      created: created,
+      custom_json: {},
+      attachments: [],
+    };
+
+    props.onSubmit && props.onSubmit(message);
   };
 
   return (
     <form onSubmit={onSubmit} style={styles.containerStyle}>
-      <div style={styles.fileButtonStyle}></div>
-
       <input
         onChange={(e) => setText(e.target.value)}
         style={styles.textInputStyle}
+        value={text}
+        placeholder="Type something..."
+        className="message-text-input"
       />
+      <style>{`.message-text-input::placeholder { color: #e1e1e1; }`}</style>
 
-      <div style={styles.sendButtonStyle}></div>
+      <button type="submit" style={styles.sendButtonStyle}>
+        ^
+      </button>
     </form>
   );
 };
 
 const styles = {
   containerStyle: {
-    display: "inline-block",
+    position: "relative",
     height: "56px",
     margin: "0px 12px",
-    padding: "0px 3.3vw",
-    width: "calc(100% - 12px - 12px - 3.3vw - 3.3vw)",
+    width: "calc(100% - 12px - 12px)",
     backgroundColor: "#3e404b",
     borderRadius: "0px 0px 8px 8px",
   } as CSSProperties,
-  fileButtonStyle: {
-    display: "inline-block",
-    backgroundColor: "blue",
-    color: "white",
-    height: "36px",
-    borderRadius: "8px",
-    width: "36px",
-    marginRight: "12px",
-  } as CSSProperties,
   textInputStyle: {
-    display: "inline-block",
     border: "1px solid rgb(24, 144, 255)",
     outline: "none",
-    backgroundColor: "black",
+    backgroundColor: "#434756",
     color: "white",
     fontFamily: "VisbyRoundCF-DemiBold",
     fontSize: "12px",
     padding: "0px 15px",
     height: "36px",
     borderRadius: "8px",
-    width: "calc(100% - 36px - 12px - 12px - 36px - 12px - 15px - 15px)",
-    marginRight: "12px",
-    position: "relative",
-    top: "-13px",
+    width: "calc(100% - 3.3vw - 3.3vw - 36px - 12px - 15px - 15px)",
+    boxShadow: "rgba(24, 144, 255, 0.35) 0px 2px 7px",
+    // Position
+    position: "absolute",
+    top: "0px",
+    left: "3.3vw",
   } as CSSProperties,
   sendButtonStyle: {
-    display: "inline-block",
     backgroundColor: "rgb(24, 144, 255)",
+    border: "1px solid rgb(24, 144, 255)",
     height: "36px",
     borderRadius: "8px",
     width: "36px",
+    color: "white",
+    boxShadow: "rgba(24, 144, 255, 0.35) 0px 5px 15px",
+    // Position
+    position: "absolute",
+    top: "0px",
+    right: "calc(3.3vw)",
   } as CSSProperties,
 };
 

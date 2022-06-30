@@ -4,6 +4,7 @@ import {
   MultiChatWindow,
   MultiChatSocket,
   useMultiChatLogic,
+  MessageFormProps,
 } from "react-chat-engine-advanced";
 
 import { Context } from "../hooks/context";
@@ -27,7 +28,9 @@ const ChatsPage = () => {
 
       <MultiChatWindow
         {...chatProps}
-        renderMessageForm={(props: any) => <MessageForm {...props} />}
+        renderMessageForm={(props: MessageFormProps) => (
+          <MessageForm {...props} />
+        )}
         style={{ height: "100vh" }}
       />
 
@@ -54,7 +57,14 @@ const ChatsPage = () => {
       /*.ce-chat-header-subtitle { font-family: 'VisbyRoundCF-DemiBold' !important; color: rgb(153, 153, 153) !important; }*/
       
       .ch-chat-feed { background-color: rgba(40,43,54,1) !important; }
-      .ce-message-list { margin: 0px 12px !important; padding: 0px 3.3vw !important; background-color: #3e404b !important; border-radius: 8px 8px 0px 0px !important; height: calc((100% - 85px) - 72px) !important; }
+      .ce-message-list { 
+        margin: 0px 12px !important;
+        padding: 0px 3.3vw !important;
+        background-color: #3e404b !important;
+        border-radius: 8px 8px 0px 0px !important; 
+        height: calc((100% - 85px) - 72px) !important; 
+        /* background-image: url({valley}) !important; background-repeat: "no-repeat" !important; background-size: "cover" !important; */
+      }
       .ce-message-date-text { font-family: 'VisbyRoundCF-DemiBold' !important; color: rgb(153, 153, 153) !important; font-size: 14px !important; }
       .ce-my-message-body { font-family: 'VisbyRoundCF-Regular' !important; font-size: 12px !important; padding: 15px !important; }
       .ce-my-message-timestamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; padding: 15px !important; margin-right: 0px !important; }
