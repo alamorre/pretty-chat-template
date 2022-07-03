@@ -32,20 +32,16 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
   const otherMember: PersonObject | undefined =
     props.chat && getOtherUser(props.chat, props.username);
 
-  console.log("otherMember", otherMember);
-
   return (
     <div className="ce-custom-chat-header">
       {otherMember && (
         <div>
-          <div className="ce-custom-header-avatar-wrapper vertical-center">
-            <Avatar
-              style={{ width: "38px", height: "38px", fontSize: "14px" }}
-              avatarUrl={otherMember?.avatar}
-              username={otherMember?.username}
-              isOnline={otherMember?.is_online}
-            />
-          </div>
+          <Avatar
+            className="ce-custom-header-avatar"
+            avatarUrl={otherMember?.avatar}
+            username={otherMember?.username}
+            isOnline={otherMember?.is_online}
+          />
 
           <div
             style={{
@@ -85,8 +81,14 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
 
       <style>{`
       .ce-custom-chat-header { display: inline-block; position: relative; width: 100%; height: 86px; z-index: 10; box-shadow: 0px 65px 100px rgb(40,43,54); }
-      .ce-custom-header-avatar-wrapper { display: inline-block; border-radius: 50%; border: 1px solid rgb(24, 144, 255); box-shadow: rgb(24 144 255 / 35%) 0px 2px 7px; position: relative; top: 28px; margin-left: 12px; }
-      .ce-custom-header-icon-wrapper { display: inline-block; maxWidth: 50%; position: relative; top: 36px; float: right; }
+      .ce-custom-header-avatar { display: inline-block; position: relative; top: 28px; margin-left: 12px; border: 1px solid ${
+        otherMember?.is_online ? "rgb(24, 144, 255)" : "#fa541c"
+      }; box-shadow: ${
+        otherMember?.is_online
+          ? "rgb(24 144 255 / 35%)"
+          : "rgb(245 34 45 / 35%)"
+      } 0px 2px 7px; width: 38px !important; height: 38px !important; font-size: 14px !important; transition: all 0.66s ease; }
+      .ce-custom-header-icon-wrapper { display: inline-block; maxWidth: 50%; position: relative; top: 36px; float: right;  }
       .ce-custom-header-icon { padding-right: 12px; cursor: pointer; color: rgb(153, 153, 153); transition: all 0.66s ease; }
       .ce-custom-header-icon:hover { color: rgb(24, 144, 255) !important; }
       `}</style>

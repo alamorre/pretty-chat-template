@@ -62,6 +62,7 @@ const SignUpForm = (props: SignUpFormProps) => {
       })
       .then((r) => {
         if (r.status === 201) {
+          userJson.avatar = r.data.avatar;
           setUser(userJson);
         }
       })

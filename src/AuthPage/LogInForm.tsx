@@ -8,8 +8,8 @@ import Link from "../components/Link";
 
 import { Context, User } from "../hooks/context";
 
-const PRIVATE_KEY: string = process.env.REACT_APP_PROJECT_KEY
-  ? process.env.REACT_APP_PROJECT_KEY
+const PROJECT_ID: string = process.env.REACT_APP_PROJECT_ID
+  ? process.env.REACT_APP_PROJECT_ID
   : "";
 
 interface LogInFormProps {
@@ -25,7 +25,7 @@ const LogInForm = (props: LogInFormProps) => {
     event.preventDefault();
 
     const headers = {
-      "Private-Key": PRIVATE_KEY,
+      "Project-ID": PROJECT_ID,
       "User-Name": email,
       "User-Secret": password,
     };
@@ -36,12 +36,14 @@ const LogInForm = (props: LogInFormProps) => {
       })
       .then((r) => {
         if (r.status === 200) {
+          console.log("r.data.avatar", r.data.avatar);
           const user: User = {
             first_name: r.data.first_name,
             last_name: r.data.last_name,
             email: email,
             username: email,
             secret: password,
+            avatar: r.data.avatar,
           };
           setUser(user);
         }

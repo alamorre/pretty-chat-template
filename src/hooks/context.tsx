@@ -6,7 +6,7 @@ export interface User {
   username: string;
   email: string;
   secret: string;
-  avatar?: File;
+  avatar?: File | string;
 }
 
 export interface ContextInterface {
