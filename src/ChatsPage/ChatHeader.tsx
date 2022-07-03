@@ -75,36 +75,10 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
             </div>
           </div>
 
-          <div
-            style={{
-              display: "inline-block",
-              maxWidth: "50%",
-              position: "relative",
-              top: "36px",
-              float: "right",
-            }}
-          >
-            <FileImageFilled
-              style={{
-                paddingRight: "12px",
-                cursor: "pointer",
-                color: "rgb(153, 153, 153)",
-              }}
-            />
-            <FileAddFilled
-              style={{
-                paddingRight: "12px",
-                cursor: "pointer",
-                color: "rgb(153, 153, 153)",
-              }}
-            />
-            <PhoneFilled
-              style={{
-                paddingRight: "12px",
-                cursor: "pointer",
-                color: "rgb(153, 153, 153)",
-              }}
-            />
+          <div className="ce-custom-header-icon-wrapper">
+            <FileImageFilled className="ce-custom-header-icon" />
+            <FileAddFilled className="ce-custom-header-icon" />
+            <PhoneFilled className="ce-custom-header-icon" />
           </div>
         </div>
       )}
@@ -112,6 +86,9 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
       <style>{`
       .ce-custom-chat-header { display: inline-block; position: relative; width: 100%; height: 86px; z-index: 10; box-shadow: 0px 65px 100px rgb(40,43,54); }
       .ce-custom-header-avatar-wrapper { display: inline-block; border-radius: 50%; border: 1px solid rgb(24, 144, 255); box-shadow: rgb(24 144 255 / 35%) 0px 2px 7px; position: relative; top: 28px; margin-left: 12px; }
+      .ce-custom-header-icon-wrapper { display: inline-block; maxWidth: 50%; position: relative; top: 36px; float: right; }
+      .ce-custom-header-icon { padding-right: 12px; cursor: pointer; color: rgb(153, 153, 153); transition: all 0.66s ease; }
+      .ce-custom-header-icon:hover { color: rgb(24, 144, 255) !important; }
       `}</style>
     </div>
   );
