@@ -50,8 +50,9 @@ const MessageForm = (props: MessageFormProps) => {
 const styles = {
   containerStyle: {
     position: "relative",
-    height: "56px",
-    margin: "0px 12px",
+    height: "68px",
+    marginLeft: "12px",
+    marginRight: "12px",
     width: "calc(100% - 12px - 12px)",
     backgroundColor: "#3e404b",
     borderRadius: "0px 0px 8px 8px",
@@ -70,7 +71,7 @@ const styles = {
     boxShadow: "rgba(24, 144, 255, 0.35) 0px 2px 7px",
     // Position
     position: "absolute",
-    top: "0px",
+    top: "12px",
     left: "3.3vw",
   } as CSSProperties,
   sendButtonStyle: {
@@ -83,7 +84,7 @@ const styles = {
     boxShadow: "rgba(24, 144, 255, 0.35) 0px 5px 15px",
     // Position
     position: "absolute",
-    top: "0px",
+    top: "12px",
     right: "calc(3.3vw)",
   } as CSSProperties,
 };

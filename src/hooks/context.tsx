@@ -11,29 +11,21 @@ export interface User {
 
 export interface ContextInterface {
   user: User | undefined;
-  setUser: (u: User) => void;
+  setUser: (u: User | undefined) => void;
 }
 
-const defaultUser: User = {
-  email: "adam@lamorre.co",
-  username: "adam@lamorre.co",
-  first_name: "Adam",
-  last_name: "La Morre",
-  secret: "Pass1234!",
-};
+interface ProviderProps {
+  children: ReactNode;
+}
 
 export const Context = createContext<ContextInterface>({
   user: undefined,
   setUser: () => {},
 });
 
-interface ContextProps {
-  children: ReactNode;
-}
-
-export const ContextProvider = (props: ContextProps) => {
+export const ContextProvider = (props: ProviderProps) => {
   // TODO: Switch default back to (undefined)
-  const [user, setUser] = useState<User>(defaultUser);
+  const [user, setUser] = useState<User | undefined>(undefined);
 
   const value = {
     user,
