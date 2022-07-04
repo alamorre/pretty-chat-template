@@ -34,7 +34,7 @@ const Sidebar = () => {
         />
       </div>
       <style>{`
-      .ce-sidebar-menu { position: absolute; top: 40vh; }
+      .ce-sidebar-menu { position: absolute; top: 30vh; }
       .ce-sidebar-icon { width: 6vw; padding-top: 12px; padding-bottom: 12px; font-size: 16px; }
       `}</style>
 

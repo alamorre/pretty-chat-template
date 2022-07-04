@@ -7820,10 +7820,10 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
-react-chat-engine-advanced@0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/react-chat-engine-advanced/-/react-chat-engine-advanced-0.1.13.tgz#0ba26fe23785181e4ec296237d7ecc2259aefb8c"
-  integrity sha512-PdedMzNg7qWSzAxz3ENCZ5jsCu+672C/ARWXwaGh3xJx9vOveTMETpGlge14MwEutZlMH2L21YA3ee8kbwxk2Q==
+react-chat-engine-advanced@0.1.14:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/react-chat-engine-advanced/-/react-chat-engine-advanced-0.1.14.tgz#4c4e3e71042ba69114b3c35cfdb6c789d71d95b4"
+  integrity sha512-g2VMxoazJBGimTMp+QiTOXQgH67ejIRRx/1tKU0Y/+iKBAu3ymH2nfZmuhlV25ouPZv9EQhqHp799MM2fNwwDQ==
   dependencies:
     "@ant-design/icons" "^4.7.0"
     "@types/react-scroll" "^1.8.3"

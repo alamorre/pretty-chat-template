@@ -82,7 +82,7 @@ const styles = {
     width: "52px",
     borderRadius: "8px",
     textAlign: "center",
-    fontSize: "36px",
+    fontSize: "30px",
   } as CSSProperties,
   labelStyle: {
     display: "inline-block",
@@ -102,7 +102,7 @@ const styles = {
     border: "none",
     borderRadius: "8px",
     padding: "24px 18px 12px 18px",
-    width: "calc(100% - 36px)", // For the padding 18px + 18px
+    width: "100%", // For the padding 18px + 18px
   } as CSSProperties,
 };
 

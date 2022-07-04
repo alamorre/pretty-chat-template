@@ -33,7 +33,7 @@ const ChatsPage = () => {
       <div
         style={{
           width: isMobile ? "0px" : "6vw",
-          height: "100vh",
+          height: "80vh",
           position: "absolute",
           top: "0px",
           left: "0px",
@@ -55,7 +55,7 @@ const ChatsPage = () => {
 
         <MultiChatWindow
           {...chatProps}
-          renderChatList={(props) => (
+          renderChatList={() => (
             <ChatList
               username={chatProps.username}
               secret={chatProps.secret}
@@ -74,8 +74,16 @@ const ChatsPage = () => {
           renderMessageForm={(props: MessageFormProps) => (
             <MessageForm {...props} />
           )}
-          renderChatSettings={() => <></>}
-          style={{ height: "100vh" }}
+          renderChatSettings={() => (
+            <div
+              style={{
+                backgroundColor: "#282b36",
+                width: "3vw",
+                height: "100vh",
+              }}
+            />
+          )}
+          style={{ height: "80vh" }}
         />
 
         <style>{`
@@ -87,6 +95,8 @@ const ChatsPage = () => {
         .ce-text-input::placeholder { color: white !important; }
         .ce-chat-card { border: 1px solid #3e404b !important; background-color: #3e404b !important; margin: 10px 12px !important; height: 68px !important; }
         .ce-chat-card:hover { border: 1px solid #1890ff !important; box-shadow: rgb(24 144 255 / 35%) 0px 2px 7px !important; }
+        .ce-chat-card-loading { height: 10px !important; }
+        .ce-chat-card-title-loading { top: 16px !important; }
         .ce-active-chat-card { border: 1px solid #1890ff !important; background-color: #1890ff !important; box-shadow: rgb(24 144 255 / 35%) 0px 2px 7px !important; color: white !important; }
         .ce-chat-card-title { color: white !important; font-family: 'VisbyRoundCF-DemiBold' !important; }
         .ce-chat-card-subtitle { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; bottom: 16px !important; width: calc(70% - 44px) !important; color: #c5c5c5 !important; }
