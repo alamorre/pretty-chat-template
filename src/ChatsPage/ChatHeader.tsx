@@ -5,27 +5,19 @@ import {
   Avatar,
 } from "react-chat-engine-advanced";
 
-import { FileImageFilled, PhoneFilled, FileAddFilled } from "@ant-design/icons";
+import {
+  FileImageFilled,
+  PhoneFilled,
+  FileAddFilled,
+  DeleteFilled,
+} from "@ant-design/icons";
+
+import { getOtherUser } from "../hooks/getOtherUser";
 
 interface CustomChatHeaderProps extends ChatHeaderProps {
   chat?: ChatObject;
   username: string;
 }
-
-const getOtherUser = (
-  chat: ChatObject,
-  username: string
-): PersonObject | undefined => {
-  let otherMember: PersonObject | undefined = undefined;
-  chat.people.map((member) => {
-    if (member.person.username !== username) {
-      // TODO: chat.is_direct_chat
-      otherMember = member.person;
-    }
-    return;
-  });
-  return otherMember;
-};
 
 const ChatHeader = (props: CustomChatHeaderProps) => {
   // TODO: Show how TS recommends props.chat &&
@@ -75,6 +67,7 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
             <FileImageFilled className="ce-custom-header-icon" />
             <FileAddFilled className="ce-custom-header-icon" />
             <PhoneFilled className="ce-custom-header-icon" />
+            <DeleteFilled className="ce-custom-header-icon" />
           </div>
         </div>
       )}

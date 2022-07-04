@@ -42,7 +42,7 @@ const styles = {
     height: "100vh",
     // Built with https://cssgradient.io/
     background:
-      "linear-gradient(66deg, rgba(40,43,54,1) 0%, rgba(40,43,54,1) 50%, rgba(40,43,54,0.8) 100%)",
+      "linear-gradient(66deg, rgb(40,43,54) 0%, rgb(40,43,54) 50%, rgba(40,43,54,0.8) 100%)",
   } as CSSProperties,
   containerStyle: {
     width: "100%",
