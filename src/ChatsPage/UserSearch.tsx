@@ -1,0 +1,134 @@
+import { AutoComplete, Input } from "antd";
+import type { SelectProps } from "antd/es/select";
+import { useState, useEffect, useRef } from "react";
+
+import { PersonObject, Avatar } from "react-chat-engine-advanced";
+
+import axios from "axios";
+
+const PRIVATE_KEY: string = process.env.REACT_APP_PROJECT_KEY
+  ? process.env.REACT_APP_PROJECT_KEY
+  : "";
+
+const PROJECT_ID: string = process.env.REACT_APP_PROJECT_ID
+  ? process.env.REACT_APP_PROJECT_ID
+  : "";
+
+interface CustomChatFormProps {
+  username: string;
+  secret: string;
+  onSelect: (chatId: number) => void;
+}
+
+const UserSearch = (props: CustomChatFormProps) => {
+  const didMountRef = useRef(false);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [users, setUsers] = useState<PersonObject[]>([]);
+  const [options, setOptions] = useState<SelectProps<object>["options"]>([]);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      const headers = { "Private-Key": PRIVATE_KEY };
+      axios
+        .get("https://api.chatengine.io/users/", { headers })
+        .then((r) => setUsers(r.data))
+        .catch();
+    }
+  });
+
+  const searchResult = (query: string) => {
+    const foundUsers = users.filter(
+      (user) =>
+        JSON.stringify(user).toLowerCase().indexOf(query.toLowerCase()) !==
+          -1 && user.username !== props.username
+    );
+
+    return foundUsers.map((user) => {
+      return {
+        value: user.username,
+        label: (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>
+              <Avatar avatarUrl={user.avatar} username={user.username} />
+            </span>
+            <span>
+              <div>
+                {user.first_name} {user.last_name}
+              </div>
+              <div>{user.username}</div>
+            </span>
+          </div>
+        ),
+      };
+    });
+  };
+  const handleSearch = (query: string) => {
+    setOptions(query ? searchResult(query) : []);
+  };
+
+  const onSelect = (value: string) => {
+    setLoading(true);
+
+    const headers = {
+      "Project-ID": PROJECT_ID,
+      "User-Name": props.username,
+      "User-Secret": props.secret,
+    };
+    const data = {
+      usernames: [props.username, value],
+      is_direct_chat: true,
+    };
+    axios
+      .put("https://api.chatengine.io/chats/", data, { headers })
+      .then((r) => {
+        props.onSelect(r.data.id);
+        setLoading(false);
+        setQuery("");
+      })
+      .catch(() => setLoading(false));
+  };
+
+  return (
+    <div>
+      <AutoComplete
+        dropdownMatchSelectWidth={252}
+        style={{
+          width: "calc(100% - 12px - 12px)",
+          margin: "0px 12px",
+          paddingTop: "28px",
+          paddingBottom: "32px",
+        }}
+        options={options}
+        onSelect={onSelect}
+        onSearch={handleSearch}
+        value={query}
+      >
+        <Input.Search
+          size="large"
+          placeholder="Chats"
+          enterButton
+          loading={loading}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </AutoComplete>
+
+      <style>{`
+      .ant-input-lg { background-color: rgb(40,43,54); outline: none; border: 1px solid rgb(40,43,54); color: white; border-radius: 8px 0px 0px 8px; }
+      .ant-input-lg::placeholder { color: white; font-family: VisbyRoundCF-DemiBold; padding-top: 12px; }
+      .ant-input-search-button { background-color: rgb(40,43,54); border: none; outline: none; margin-left: 3px; border-radius: 0px 8px 8px 0px !important; }
+      .ant-input-search-button:hover { background-color: rgb(40,43,54); }
+      .ant-input-group-addon { background-color: rgb(40,43,54); }
+      `}</style>
+    </div>
+  );
+};
+
+export default UserSearch;

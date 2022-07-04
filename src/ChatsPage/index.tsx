@@ -6,6 +6,7 @@ import {
   useMultiChatLogic,
   MessageFormProps,
   ChatHeaderProps,
+  ChatFormProps,
 } from "react-chat-engine-advanced";
 
 import { Context } from "../hooks/context";
@@ -14,6 +15,7 @@ import { useIsMobile } from "../hooks/isMobile";
 import Sidebar from "./Sidebar";
 import ChatHeader from "./ChatHeader";
 import MessageForm from "./MessageForm";
+import UserSearch from "./UserSearch";
 
 const ChatsPage = () => {
   const { user } = useContext(Context);
@@ -53,6 +55,14 @@ const ChatsPage = () => {
 
         <MultiChatWindow
           {...chatProps}
+          renderChatForm={(props: ChatFormProps) => (
+            <UserSearch
+              username={chatProps.username}
+              secret={chatProps.secret}
+              onSelect={(chatId: number) => chatProps.setActiveChatId(chatId)}
+            />
+          )}
+          // renderChatCard={() => <></>}
           renderChatHeader={(props: ChatHeaderProps) => (
             <ChatHeader
               {...props}
@@ -63,6 +73,7 @@ const ChatsPage = () => {
           renderMessageForm={(props: MessageFormProps) => (
             <MessageForm {...props} />
           )}
+          renderChatSettings={() => <></>}
           style={{ height: "100vh" }}
         />
 
