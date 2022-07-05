@@ -33,7 +33,6 @@ const LogInForm = (props: LogInFormProps) => {
       })
       .then((r) => {
         if (r.status === 200) {
-          console.log("r.data.avatar", r.data.avatar);
           const user: User = {
             first_name: r.data.first_name,
             last_name: r.data.last_name,

@@ -91,6 +91,7 @@ const ChatsPage = () => {
                 {...props}
                 chat={chatProps.chat}
                 username={chatProps.username}
+                secret={chatProps.secret}
               />
             )}
             renderMessageForm={(props: MessageFormProps) => (
@@ -132,7 +133,14 @@ const ChatsPage = () => {
         .ce-message-date-text { font-family: 'VisbyRoundCF-DemiBold' !important; color: rgb(153, 153, 153) !important; font-size: 14px !important; letter-spacing: -1px; }
         .ce-my-message-body { font-family: 'VisbyRoundCF-Regular' !important; font-size: 12px !important; padding: 15px !important; }
         .ce-my-message-timestamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; padding: 15px !important; margin-right: 0px !important; letter-spacing: -1px; }
+        
+        .ce-their-message-body { font-family: 'VisbyRoundCF-Regular' !important; font-size: 12px !important; padding: 15px !important; background-color: #434756 !important; color: white !important; }
+        .ce-their-message-timestamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; padding: 15px !important; margin-left: 0px !important; letter-spacing: -1px; }
+        
         .ce-their-message-timestamp { color: rgb(241, 240, 240) !important; letter-spacing: -1px; }
+        .ce-their-message-sender-username { color: #999 !important; }
+        .ce-message-file { background-color: #434758 !important; color: #c5c5c5 !important; border-radius: 8px !important; }
+        .ce-message-image { background-color: #434758 !important; color: #c5c5c5 !important; border-radius: 8px !important; padding: 0px !important; max-width: 124px !important; max-height: 124px !important; }
         `}</style>
         </div>
       </div>

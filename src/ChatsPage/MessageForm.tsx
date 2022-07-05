@@ -4,6 +4,8 @@ import { CaretUpFilled } from "@ant-design/icons";
 
 import { MessageObject, MessageFormProps } from "react-chat-engine-advanced";
 
+import { nowTimeStamp } from "../hooks/dates";
+
 const MessageForm = (props: MessageFormProps) => {
   const [text, setText] = useState<string>("");
 
@@ -15,15 +17,11 @@ const MessageForm = (props: MessageFormProps) => {
     }
 
     setText("");
-    const created = new Date()
-      .toISOString()
-      .replace("T", " ")
-      .replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
 
     const message: MessageObject = {
       text: text,
       sender_username: "adam@lamorre.co",
-      created: created,
+      created: nowTimeStamp(),
       custom_json: {},
       attachments: [],
     };
