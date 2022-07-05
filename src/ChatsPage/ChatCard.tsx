@@ -9,7 +9,7 @@ import { getOtherUser } from "../hooks/getOtherUser";
 interface CustomChatCardProps extends ChatCardProps {
   username: string;
   isActive: boolean;
-  setActiveChatId: (chatId: number) => void;
+  onChatCardClick: (chatId: number) => void;
   chat?: ChatObject;
 }
 
@@ -20,11 +20,19 @@ const CustomChatCard = (props: CustomChatCardProps) => {
   const firstName = otherMember ? otherMember.first_name : "";
   const lastName = otherMember ? otherMember.last_name : "";
   const username = otherMember ? otherMember.username : "";
+  const messageText = props.chat.last_message.text;
+  const hasNotification =
+    props.chat.last_message.sender_username !== props.username;
 
   return (
     <ChatCard
       title={`${firstName} ${lastName}`}
-      description={username}
+      description={
+        messageText === null || messageText.length === 0
+          ? "Say hello!"
+          : messageText
+      }
+      hasNotification={hasNotification}
       avatarUrl={otherMember?.avatar}
       avatarUsername={username}
       avatarStyle={{
@@ -36,7 +44,7 @@ const CustomChatCard = (props: CustomChatCardProps) => {
           : "1px solid rgb(245 34 45)",
       }}
       isActive={props.isActive}
-      onClick={() => props.chat && props.setActiveChatId(props.chat.id)}
+      onClick={() => props.chat && props.onChatCardClick(props.chat.id)}
     />
   );
 };

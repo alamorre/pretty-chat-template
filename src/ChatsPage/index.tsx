@@ -78,7 +78,7 @@ const ChatsPage = () => {
               <ChatCard
                 {...props}
                 username={chatProps.username}
-                setActiveChatId={chatProps.setActiveChatId}
+                onChatCardClick={chatProps.onChatCardClick}
                 isActive={
                   props.chat !== undefined &&
                   chatProps.activeChatId === props.chat.id
@@ -123,15 +123,16 @@ const ChatsPage = () => {
         .ce-chat-card-title { color: white !important; font-family: 'VisbyRoundCF-DemiBold' !important; }
         .ce-chat-card-subtitle { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; bottom: 16px !important; width: calc(70% - 44px) !important; color: #c5c5c5 !important; }
         .ce-chat-card-time-stamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; bottom: 16px !important; }
-        .ce-avatar-status { border: 2px solid rgb(40,43,54) !important; }
+        .ce-chat-card-unread { top: calc((68px - 12px) / 2) !important; }
+        .ce-avatar-status { border: 2px solid rgb(40,43,54) !important; width: 10px !important; height: 10px !important; }
         .ce-chat-card-avatar { top: 12px !important; }
         .ce-chat-feed-column { border: none !important; }
         .ce-chat-feed { background-color: rgb(40,43,54) !important; }
         .ce-message-list { margin-top: 24px !important; margin-left: 12px !important; margin-right: 12px !important; padding: 0px 3.3vw !important; background-color: #3e404b !important; border-radius: 8px 8px 0px 0px !important; height: calc((100% - 85px) - 72px - 24px - 12px) !important; }
-        .ce-message-date-text { font-family: 'VisbyRoundCF-DemiBold' !important; color: rgb(153, 153, 153) !important; font-size: 14px !important; }
+        .ce-message-date-text { font-family: 'VisbyRoundCF-DemiBold' !important; color: rgb(153, 153, 153) !important; font-size: 14px !important; letter-spacing: -1px; }
         .ce-my-message-body { font-family: 'VisbyRoundCF-Regular' !important; font-size: 12px !important; padding: 15px !important; }
-        .ce-my-message-timestamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; padding: 15px !important; margin-right: 0px !important; }
-        .ce-their-message-timestamp { color: rgb(241, 240, 240) !important; }
+        .ce-my-message-timestamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; padding: 15px !important; margin-right: 0px !important; letter-spacing: -1px; }
+        .ce-their-message-timestamp { color: rgb(241, 240, 240) !important; letter-spacing: -1px; }
         `}</style>
         </div>
       </div>
