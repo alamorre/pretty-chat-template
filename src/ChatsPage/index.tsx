@@ -6,6 +6,8 @@ import {
   useMultiChatLogic,
   MessageFormProps,
   ChatHeaderProps,
+  ChatCardProps,
+  ChatFormProps,
 } from "react-chat-engine-advanced";
 
 import { Context } from "../hooks/context";
@@ -14,7 +16,8 @@ import { useIsMobile } from "../hooks/isMobile";
 import Sidebar from "./Sidebar";
 import ChatHeader from "./ChatHeader";
 import MessageForm from "./MessageForm";
-import ChatList from "./ChatList";
+import ChatCard from "./ChatCard";
+import UserSearch from "./UserSearch";
 
 import { projectId } from "../hooks/constants";
 
@@ -64,13 +67,23 @@ const ChatsPage = () => {
 
           <MultiChatWindow
             {...chatProps}
-            renderChatList={() => (
-              <ChatList
+            renderChatForm={(props: ChatFormProps) => (
+              <UserSearch
                 username={chatProps.username}
                 secret={chatProps.secret}
-                chats={chatProps.chats}
-                activeChatId={chatProps.activeChatId}
-                setActiveChat={chatProps.setActiveChatId}
+                onSelect={(chatId: number) => chatProps.setActiveChatId(chatId)}
+              />
+            )}
+            renderChatCard={(props: ChatCardProps) => (
+              <ChatCard
+                {...props}
+                username={chatProps.username}
+                setActiveChatId={chatProps.setActiveChatId}
+                isActive={
+                  props.chat !== undefined &&
+                  chatProps.activeChatId === props.chat.id
+                }
+                chat={props.chat}
               />
             )}
             renderChatHeader={(props: ChatHeaderProps) => (

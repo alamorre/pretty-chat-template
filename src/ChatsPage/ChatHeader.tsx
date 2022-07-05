@@ -6,10 +6,9 @@ import {
 } from "react-chat-engine-advanced";
 
 import {
-  FileImageFilled,
   PhoneFilled,
-  FileAddFilled,
   DeleteFilled,
+  PaperClipOutlined,
 } from "@ant-design/icons";
 
 import { getOtherUser } from "../hooks/getOtherUser";
@@ -64,8 +63,7 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
           </div>
 
           <div className="ce-custom-header-icon-wrapper">
-            <FileImageFilled className="ce-custom-header-icon" />
-            <FileAddFilled className="ce-custom-header-icon" />
+            <PaperClipOutlined className="ce-custom-header-icon" />
             <PhoneFilled className="ce-custom-header-icon" />
             <DeleteFilled className="ce-custom-header-icon" />
           </div>

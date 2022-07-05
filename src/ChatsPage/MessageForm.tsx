@@ -1,4 +1,6 @@
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
+
+import { CaretUpFilled } from "@ant-design/icons";
 
 import { MessageObject, MessageFormProps } from "react-chat-engine-advanced";
 
@@ -30,63 +32,28 @@ const MessageForm = (props: MessageFormProps) => {
   };
 
   return (
-    <form onSubmit={onSubmit} style={styles.containerStyle}>
+    <form onSubmit={onSubmit} className="ce-custom-message-form">
       <input
         onChange={(e) => setText(e.target.value)}
-        style={styles.textInputStyle}
         value={text}
         placeholder="Type something..."
-        className="message-text-input"
+        className="ce-custom-message-input"
       />
-      <style>{`.message-text-input::placeholder { color: #e1e1e1; }`}</style>
 
-      <button type="submit" style={styles.sendButtonStyle}>
-        ^
+      <button type="submit" className="ce-custom-send-button">
+        <CaretUpFilled />
       </button>
+
+      <style>{`
+      .ce-custom-message-form { position: relative; height: 68px; margin-left: 12px; margin-right: 12px; width: calc(100% - 12px - 12px); border-radius: 0px 0px 8px 8px; background-color: #3e404b; }
+      .ce-custom-message-input { position: absolute; top: 12px; left: 3.3vw; width: calc(100% - 3.3vw - 3.3vw - 14px - 15px - 15px); box-shadow: rgba(24, 144, 255, 0.35) 0px 2px 7px; border: 1px solid rgb(24, 144, 255); outline: none; background-color: #434756; color: white; font-size: 12px; padding: 0px 15px; font-family: VisbyRoundCF-DemiBold; height: 36px; border-radius: 8px; }
+      .ce-custom-message-input:focus { color: red !important; }
+      .ce-custom-message-input::placeholder { color: #e1e1e1; }
+      .ce-custom-send-button { cursor: pointer; background-color: rgb(24, 144, 255); border: 1px solid rgb(24, 144, 255); width: 36px; height: 36px; border-radius: 8px; color: white; box-shadow: rgba(24, 144, 255, 0.35) 0px 5px 15px; position: absolute; top: 12px; right: 3.3vw; transition: all .44s ease; }
+      .ce-custom-send-button:hover { background-color: #40a9ff; }
+      `}</style>
     </form>
   );
-};
-
-const styles = {
-  containerStyle: {
-    position: "relative",
-    height: "68px",
-    marginLeft: "12px",
-    marginRight: "12px",
-    width: "calc(100% - 12px - 12px)",
-    backgroundColor: "#3e404b",
-    borderRadius: "0px 0px 8px 8px",
-  } as CSSProperties,
-  textInputStyle: {
-    border: "1px solid rgb(24, 144, 255)",
-    outline: "none",
-    backgroundColor: "#434756",
-    color: "white",
-    fontFamily: "VisbyRoundCF-DemiBold",
-    fontSize: "12px",
-    padding: "0px 15px",
-    height: "36px",
-    borderRadius: "8px",
-    width: "calc(100% - 3.3vw - 3.3vw - 36px - 12px - 15px - 15px)",
-    boxShadow: "rgba(24, 144, 255, 0.35) 0px 2px 7px",
-    // Position
-    position: "absolute",
-    top: "12px",
-    left: "3.3vw",
-  } as CSSProperties,
-  sendButtonStyle: {
-    backgroundColor: "rgb(24, 144, 255)",
-    border: "1px solid rgb(24, 144, 255)",
-    height: "36px",
-    borderRadius: "8px",
-    width: "36px",
-    color: "white",
-    boxShadow: "rgba(24, 144, 255, 0.35) 0px 5px 15px",
-    // Position
-    position: "absolute",
-    top: "12px",
-    right: "calc(3.3vw)",
-  } as CSSProperties,
 };
 
 export default MessageForm;
