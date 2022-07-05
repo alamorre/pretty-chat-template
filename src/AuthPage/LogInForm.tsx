@@ -7,10 +7,7 @@ import Button from "../components/Button";
 import Link from "../components/Link";
 
 import { Context, User } from "../hooks/context";
-
-const PROJECT_ID: string = process.env.REACT_APP_PROJECT_ID
-  ? process.env.REACT_APP_PROJECT_ID
-  : "";
+import { projectId } from "../hooks/constants";
 
 interface LogInFormProps {
   onSignUp: () => void;
@@ -25,7 +22,7 @@ const LogInForm = (props: LogInFormProps) => {
     event.preventDefault();
 
     const headers = {
-      "Project-ID": PROJECT_ID,
+      "Project-ID": projectId,
       "User-Name": email,
       "User-Secret": password,
     };

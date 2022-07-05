@@ -6,13 +6,7 @@ import { PersonObject, Avatar } from "react-chat-engine-advanced";
 
 import axios from "axios";
 
-const PRIVATE_KEY: string = process.env.REACT_APP_PROJECT_KEY
-  ? process.env.REACT_APP_PROJECT_KEY
-  : "";
-
-const PROJECT_ID: string = process.env.REACT_APP_PROJECT_ID
-  ? process.env.REACT_APP_PROJECT_ID
-  : "";
+import { privateKey, projectId } from "../../hooks/constants";
 
 interface CustomChatFormProps {
   username: string;
@@ -31,7 +25,7 @@ const UserSearch = (props: CustomChatFormProps) => {
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
-      const headers = { "Private-Key": PRIVATE_KEY };
+      const headers = { "Private-Key": privateKey };
       axios
         .get("https://api.chatengine.io/users/", { headers })
         .then((r) => setUsers(r.data))
@@ -78,7 +72,7 @@ const UserSearch = (props: CustomChatFormProps) => {
     setLoading(true);
 
     const headers = {
-      "Project-ID": PROJECT_ID,
+      "Project-ID": projectId,
       "User-Name": props.username,
       "User-Secret": props.secret,
     };

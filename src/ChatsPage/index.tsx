@@ -16,77 +16,86 @@ import ChatHeader from "./ChatHeader";
 import MessageForm from "./MessageForm";
 import ChatList from "./ChatList";
 
+import { projectId } from "../hooks/constants";
+
 const ChatsPage = () => {
   const { user } = useContext(Context);
+
   const isMobile: boolean = useIsMobile();
 
-  const projectId = process.env.REACT_APP_PROJECT_ID
-    ? process.env.REACT_APP_PROJECT_ID
-    : "";
   const username = user ? user.username : "";
   const secret = user ? user.secret : "";
 
   const chatProps = useMultiChatLogic(projectId, username, secret);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div
+      style={{ backgroundColor: "#969da6", width: "100vw", height: "100vh" }}
+    >
       <div
         style={{
-          width: isMobile ? "0px" : "6vw",
-          height: "80vh",
-          position: "absolute",
-          top: "0px",
-          left: "0px",
-          backgroundColor: "rgb(40,43,54)",
+          position: "relative",
+          top: "10vh",
+          left: "calc(50vw - 3vw - 1.5vw - 35vw)",
         }}
       >
-        <Sidebar />
-      </div>
+        <div
+          style={{
+            width: isMobile ? "0px" : "6vw",
+            height: "80vh",
+            position: "absolute",
+            top: "0px",
+            left: "0px",
+            backgroundColor: "rgb(40,43,54)",
+          }}
+        >
+          <Sidebar />
+        </div>
 
-      <div
-        style={{
-          width: isMobile ? "100vw" : "calc(100vw - 6vw)",
-          position: "absolute",
-          top: "0px",
-          left: isMobile ? "0px" : "6vw",
-        }}
-      >
-        <MultiChatSocket {...chatProps} />
+        <div
+          style={{
+            width: isMobile ? "100vw" : "calc(100vw - 6vw)",
+            position: "absolute",
+            top: "0px",
+            left: isMobile ? "0px" : "6vw",
+          }}
+        >
+          <MultiChatSocket {...chatProps} />
 
-        <MultiChatWindow
-          {...chatProps}
-          renderChatList={() => (
-            <ChatList
-              username={chatProps.username}
-              secret={chatProps.secret}
-              chats={chatProps.chats}
-              activeChatId={chatProps.activeChatId}
-              setActiveChat={chatProps.setActiveChatId}
-            />
-          )}
-          renderChatHeader={(props: ChatHeaderProps) => (
-            <ChatHeader
-              {...props}
-              chat={chatProps.chat}
-              username={chatProps.username}
-            />
-          )}
-          renderMessageForm={(props: MessageFormProps) => (
-            <MessageForm {...props} />
-          )}
-          renderChatSettings={() => (
-            <div
-              style={{
-                backgroundColor: "#282b36",
-                width: "3vw",
-                height: "100vh",
-              }}
-            />
-          )}
-          style={{ height: "80vh" }}
-        />
+          <MultiChatWindow
+            {...chatProps}
+            renderChatList={() => (
+              <ChatList
+                username={chatProps.username}
+                secret={chatProps.secret}
+                chats={chatProps.chats}
+                activeChatId={chatProps.activeChatId}
+                setActiveChat={chatProps.setActiveChatId}
+              />
+            )}
+            renderChatHeader={(props: ChatHeaderProps) => (
+              <ChatHeader
+                {...props}
+                chat={chatProps.chat}
+                username={chatProps.username}
+              />
+            )}
+            renderMessageForm={(props: MessageFormProps) => (
+              <MessageForm {...props} />
+            )}
+            renderChatSettings={() => (
+              <div
+                style={{
+                  backgroundColor: "#282b36",
+                  width: "3vw",
+                  height: "100vh",
+                }}
+              />
+            )}
+            style={{ height: "80vh" }}
+          />
 
-        <style>{`
+          <style>{`
         .ce-chat-list { background-color: rgb(40,43,54) !important; }
         .ce-chat-form { background-color: rgb(40,43,54) !important; padding-bottom: 14px !important;  }
         .ce-chat-form-title { color: white !important; font-family: 'VisbyRoundCF-DemiBold' !important; }
@@ -103,27 +112,15 @@ const ChatsPage = () => {
         .ce-chat-card-time-stamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; bottom: 16px !important; }
         .ce-avatar-status { border: 2px solid rgb(40,43,54) !important; }
         .ce-chat-card-avatar { top: 12px !important; }
-
         .ce-chat-feed-column { border: none !important; }
         .ce-chat-feed { background-color: rgb(40,43,54) !important; }
-
-        .ce-message-list {
-          margin-top: 24px !important;
-          margin-left: 12px !important;
-          margin-right: 12px !important;
-          padding: 0px 3.3vw !important;
-          background-color: #3e404b !important;
-          border-radius: 8px 8px 0px 0px !important;
-          height: calc((100% - 85px) - 72px - 24px - 12px) !important;
-        }
+        .ce-message-list { margin-top: 24px !important; margin-left: 12px !important; margin-right: 12px !important; padding: 0px 3.3vw !important; background-color: #3e404b !important; border-radius: 8px 8px 0px 0px !important; height: calc((100% - 85px) - 72px - 24px - 12px) !important; }
         .ce-message-date-text { font-family: 'VisbyRoundCF-DemiBold' !important; color: rgb(153, 153, 153) !important; font-size: 14px !important; }
         .ce-my-message-body { font-family: 'VisbyRoundCF-Regular' !important; font-size: 12px !important; padding: 15px !important; }
         .ce-my-message-timestamp { font-family: 'VisbyRoundCF-DemiBold' !important; font-size: 12px !important; padding: 15px !important; margin-right: 0px !important; }
         .ce-their-message-timestamp { color: rgb(241, 240, 240) !important; }
-        
-        // TODO: chat-card-title-LOADING identifier
-        // TODO: chat-feed-messages-head and chat-feed-messages-tail for buffering
         `}</style>
+        </div>
       </div>
     </div>
   );

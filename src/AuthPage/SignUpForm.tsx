@@ -4,15 +4,12 @@ import axios from "axios";
 
 import { useIsMobile } from "../hooks/isMobile";
 import { Context, User } from "../hooks/context";
+import { privateKey } from "../hooks/constants";
 
 import TextInput from "../components/TextInput";
 import PhotoInput from "../components/PhotoInput";
 import Button from "../components/Button";
 import Link from "../components/Link";
-
-const PRIVATE_KEY: string = process.env.REACT_APP_PROJECT_KEY
-  ? process.env.REACT_APP_PROJECT_KEY
-  : "";
 
 interface SignUpFormProps {
   onLogIn: () => void;
@@ -52,9 +49,7 @@ const SignUpForm = (props: SignUpFormProps) => {
       formData.append("avatar", avatar, avatar.name);
     }
 
-    const headers = {
-      "Private-Key": PRIVATE_KEY,
-    };
+    const headers = { "Private-Key": privateKey };
 
     axios
       .post("https://api.chatengine.io/users/", formData, {
