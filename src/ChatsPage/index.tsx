@@ -147,7 +147,7 @@ const ChatsPage = () => {
         .ce-message-file { background-color: #434758 !important; color: #c5c5c5 !important; border-radius: 8px !important; }
         .ce-message-image { background-color: #434758 !important; color: #c5c5c5 !important; border-radius: 8px !important; padding: 0px !important; max-width: 124px !important; max-height: 124px !important; }
 
-        .ce-mobile-chat-list-button { top: 74px !important; left: 0px !important; }
+        .ce-mobile-chat-list-button { top: 32px !important; left: 0px !important; }
         .ce-mobile-chat-settings-button { display: none !important; }
         `}</style>
     </div>

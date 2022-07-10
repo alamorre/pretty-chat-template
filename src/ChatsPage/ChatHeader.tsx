@@ -16,6 +16,8 @@ import axios from "axios";
 
 import { nowTimeStamp } from "../hooks/dates";
 import { getOtherUser } from "../hooks/getOtherUser";
+import { useIsMobile } from "../hooks/isMobile";
+
 import { privateKey, projectId } from "../hooks/constants";
 import { useState } from "react";
 
@@ -26,8 +28,11 @@ interface CustomChatHeaderProps extends ChatHeaderProps {
 }
 
 const ChatHeader = (props: CustomChatHeaderProps) => {
+  // State
   const [isFilePickerLoading, setFilePickerLoading] = useState(false);
   const [isDeleteLoading, setDeleteLoading] = useState(false);
+  // Hooks
+  const isMobile: boolean = useIsMobile();
 
   // TODO: Show how TS recommends props.chat &&
   const otherMember: PersonObject | undefined =
@@ -130,7 +135,9 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
       .ce-custom-header-text { display: inline-block; max-width: 50%; padding-left: 14px; position: relative; top: 21px; }
       .ce-custom-header-title { color: white; fontSize: 13px; fontFamily: VisbyRoundCF-DemiBold; }
       .ce-custom-header-subtitle { color: rgb(153, 153, 153); font-size: 11px; }
-      .ce-custom-header-avatar { display: inline-block; position: relative; top: 28px; margin-left: 12px; border: 1px solid ${
+      .ce-custom-header-avatar { display: inline-block; position: relative; top: 28px; margin-left: ${
+        isMobile ? "48px" : "12px"
+      }; border: 1px solid ${
         otherMember?.is_online ? "rgb(24, 144, 255)" : "#fa541c"
       }; box-shadow: ${
         otherMember?.is_online

@@ -78,7 +78,6 @@ const UserSearch = (props: CustomChatFormProps) => {
     };
     const data = {
       usernames: [props.username, value],
-      is_direct_chat: true,
     };
     axios
       .put("https://api.chatengine.io/chats/", data, { headers })
