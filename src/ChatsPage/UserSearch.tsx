@@ -94,12 +94,7 @@ const UserSearch = (props: CustomChatFormProps) => {
     <div>
       <AutoComplete
         dropdownMatchSelectWidth={252}
-        style={{
-          width: "calc(100% - 12px - 12px)",
-          margin: "0px 12px",
-          paddingTop: "28px",
-          paddingBottom: "32px",
-        }}
+        className="ce-chat-form-autocomplete"
         options={options}
         onSelect={onSelect}
         onSearch={handleSearch}
@@ -115,6 +110,7 @@ const UserSearch = (props: CustomChatFormProps) => {
       </AutoComplete>
 
       <style>{`
+      .ce-chat-form-autocomplete { width: calc(100% - 12px - 12px); margin: 0px 12px; padding-top: 28px; padding-bottom: 32px; }
       .ant-input-lg { background-color: rgb(40,43,54); outline: none; border: 1px solid rgb(40,43,54); color: white; border-radius: 8px 0px 0px 8px; }
       .ant-input-lg::placeholder { color: white; font-family: VisbyRoundCF-DemiBold; padding-top: 12px; }
       .ant-input-search-button { background-color: rgb(40,43,54); border: none; outline: none; margin-left: 3px; border-radius: 0px 8px 8px 0px !important; }

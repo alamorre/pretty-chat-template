@@ -1,4 +1,4 @@
-import { useState, CSSProperties, useContext } from "react";
+import { useState, useContext } from "react";
 
 import axios from "axios";
 
@@ -6,16 +6,19 @@ import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import Link from "../components/Link";
 
-import { Context, User } from "../hooks/context";
+import { Context } from "../hooks/context";
 import { projectId } from "../hooks/constants";
+import { PersonObject } from "react-chat-engine-advanced";
 
 interface LogInFormProps {
-  onSignUp: () => void;
+  onHasNoAccount: () => void;
 }
 
 const LogInForm = (props: LogInFormProps) => {
+  // State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // Hooks
   const { setUser } = useContext(Context);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,13 +36,15 @@ const LogInForm = (props: LogInFormProps) => {
       })
       .then((r) => {
         if (r.status === 200) {
-          const user: User = {
+          const user: PersonObject = {
             first_name: r.data.first_name,
             last_name: r.data.last_name,
             email: email,
             username: email,
             secret: password,
             avatar: r.data.avatar,
+            custom_json: {},
+            is_online: true,
           };
           setUser(user);
         }
@@ -49,10 +54,10 @@ const LogInForm = (props: LogInFormProps) => {
 
   return (
     <div>
-      <div style={styles.titleStyle}>Welcome Back</div>
+      <div className="form-title">Welcome Back</div>
 
-      <div style={styles.subtitleStyle}>
-        New here? <Link onClick={() => props.onSignUp()}>Sign Up</Link>
+      <div className="form-subtitle">
+        New here? <Link onClick={() => props.onHasNoAccount()}>Sign Up</Link>
       </div>
 
       <form onSubmit={onSubmit}>
@@ -75,23 +80,6 @@ const LogInForm = (props: LogInFormProps) => {
       </form>
     </div>
   );
-};
-
-const styles = {
-  titleStyle: {
-    fontSize: "42px",
-    fontFamily: "VisbyRoundCF-Heavy",
-    letterSpacing: "0.5px",
-    color: "#e8e8e8",
-    paddingBottom: "12px",
-  } as CSSProperties,
-  subtitleStyle: {
-    fontSize: "18px",
-    fontFamily: "VisbyRoundCF-Regular",
-    letterSpacing: "0.5px",
-    color: "#afafaf",
-    paddingBottom: "24px",
-  } as CSSProperties,
 };
 
 export default LogInForm;

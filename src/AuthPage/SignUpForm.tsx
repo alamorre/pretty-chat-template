@@ -1,9 +1,11 @@
-import { CSSProperties, useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import axios from "axios";
 
+import { PersonObject } from "react-chat-engine-advanced";
+
 import { useIsMobile } from "../hooks/isMobile";
-import { Context, User } from "../hooks/context";
+import { Context } from "../hooks/context";
 import { privateKey } from "../hooks/constants";
 
 import TextInput from "../components/TextInput";
@@ -12,7 +14,7 @@ import Button from "../components/Button";
 import Link from "../components/Link";
 
 interface SignUpFormProps {
-  onLogIn: () => void;
+  onHasAccount: () => void;
 }
 
 const SignUpForm = (props: SignUpFormProps) => {
@@ -22,21 +24,22 @@ const SignUpForm = (props: SignUpFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState<File | undefined>(undefined);
-  // Context
-  const { setUser } = useContext(Context);
   // Hooks
+  const { setUser } = useContext(Context);
   const isMobile: boolean = useIsMobile();
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const userJson: User = {
+    const userJson: PersonObject = {
       email: email,
       username: email,
       first_name: firstName,
       last_name: lastName,
       secret: password,
-      avatar: avatar,
+      avatar: null,
+      custom_json: {},
+      is_online: true,
     };
 
     let formData = new FormData();
@@ -66,10 +69,11 @@ const SignUpForm = (props: SignUpFormProps) => {
 
   return (
     <div>
-      <div style={styles.titleStyle}>Create an account</div>
+      <div className="form-title">Create an account</div>
 
-      <div style={styles.subtitleStyle}>
-        Already a member? <Link onClick={() => props.onLogIn()}>Log in</Link>
+      <div className="form-subtitle">
+        Already a member?{" "}
+        <Link onClick={() => props.onHasAccount()}>Log in</Link>
       </div>
 
       <form onSubmit={onSubmit}>
@@ -136,23 +140,6 @@ const SignUpForm = (props: SignUpFormProps) => {
       </form>
     </div>
   );
-};
-
-const styles = {
-  titleStyle: {
-    fontSize: "42px",
-    fontFamily: "VisbyRoundCF-Heavy",
-    letterSpacing: "0.5px",
-    color: "#e8e8e8",
-    paddingBottom: "12px",
-  } as CSSProperties,
-  subtitleStyle: {
-    fontSize: "18px",
-    fontFamily: "VisbyRoundCF-Regular",
-    letterSpacing: "0.5px",
-    color: "#afafaf",
-    paddingBottom: "24px",
-  } as CSSProperties,
 };
 
 export default SignUpForm;

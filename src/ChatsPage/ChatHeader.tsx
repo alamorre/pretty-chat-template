@@ -84,30 +84,11 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
             isOnline={otherMember?.is_online}
           />
 
-          <div
-            style={{
-              display: "inline-block",
-              maxWidth: "50%",
-              paddingLeft: "14px",
-              position: "relative",
-              top: "21px",
-            }}
-          >
-            <div
-              style={{
-                color: "white",
-                fontSize: "13px",
-                fontFamily: "VisbyRoundCF-DemiBold",
-              }}
-            >
+          <div className="ce-custom-header-text">
+            <div className="ce-custom-header-title">
               {otherMember.first_name} {otherMember.last_name}
             </div>
-            <div
-              style={{
-                color: "rgb(153, 153, 153)",
-                fontSize: "11px",
-              }}
-            >
+            <div className="ce-custom-header-subtitle">
               {otherMember.is_online ? "Online" : "Offline"}
             </div>
           </div>
@@ -145,7 +126,10 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
       )}
 
       <style>{`
-      .ce-custom-chat-header { display: inline-block; position: relative; width: 100%; height: 86px; z-index: 10; box-shadow: 0px 65px 100px rgb(40,43,54); }
+      .ce-custom-chat-header { display: inline-block; position: relative; width: 100%; height: 86px; }
+      .ce-custom-header-text { display: inline-block; max-width: 50%; padding-left: 14px; position: relative; top: 21px; }
+      .ce-custom-header-title { color: white; fontSize: 13px; fontFamily: VisbyRoundCF-DemiBold; }
+      .ce-custom-header-subtitle { color: rgb(153, 153, 153); font-size: 11px; }
       .ce-custom-header-avatar { display: inline-block; position: relative; top: 28px; margin-left: 12px; border: 1px solid ${
         otherMember?.is_online ? "rgb(24, 144, 255)" : "#fa541c"
       }; box-shadow: ${

@@ -22,30 +22,30 @@ import UserSearch from "./UserSearch";
 import { projectId } from "../hooks/constants";
 
 const ChatsPage = () => {
+  // Hooks
   const { user } = useContext(Context);
-
   const isMobile: boolean = useIsMobile();
-
-  const username = user ? user.username : "";
-  const secret = user ? user.secret : "";
-
+  // Chat Engine Hooks
+  const username: string = user ? user.username : "";
+  const secret: string = user && user.secret !== null ? user.secret : "";
   const chatProps = useMultiChatLogic(projectId, username, secret);
 
   return (
-    <div
-      style={{ backgroundColor: "#969da6", width: "100vw", height: "100vh" }}
-    >
+    <div className="grey-background">
       <div
         style={{
           position: "relative",
-          top: "10vh",
-          left: "calc(50vw - 3vw - 1.5vw - 35vw)",
+          top: isMobile ? "0px" : "10vh",
+          left: isMobile ? "0px" : "calc(50vw - 3vw - 1.5vw - 35vw)",
+          height: isMobile ? "100vh" : "80vh",
+          width: isMobile ? "100vw" : "calc(100vw - 10.5vw - 10.5vw)",
+          backgroundColor: "grey",
         }}
       >
         <div
           style={{
-            width: isMobile ? "0px" : "6vw",
-            height: "80vh",
+            width: "6vw",
+            height: "100%",
             position: "absolute",
             top: "0px",
             left: "0px",
@@ -61,17 +61,18 @@ const ChatsPage = () => {
             position: "absolute",
             top: "0px",
             left: isMobile ? "0px" : "6vw",
+            height: "100%", // Fill parent height
           }}
         >
           <MultiChatSocket {...chatProps} />
 
           <MultiChatWindow
             {...chatProps}
-            renderChatForm={(props: ChatFormProps) => (
+            renderChatForm={() => (
               <UserSearch
                 username={chatProps.username}
                 secret={chatProps.secret}
-                onSelect={(chatId: number) => chatProps.setActiveChatId(chatId)}
+                onSelect={(chatId: number) => chatProps.onChatCardClick(chatId)}
               />
             )}
             renderChatCard={(props: ChatCardProps) => (
@@ -106,10 +107,14 @@ const ChatsPage = () => {
                 }}
               />
             )}
-            style={{ height: "80vh" }}
+            style={{ height: "100%" }}
           />
+        </div>
+      </div>
 
-          <style>{`
+      <style>{`
+        .grey-background { background-color: #969da6; width: 100vw; height: 100vh; }
+          
         .ce-chat-list { background-color: rgb(40,43,54) !important; }
         .ce-chat-form { background-color: rgb(40,43,54) !important; padding-bottom: 14px !important;  }
         .ce-chat-form-title { color: white !important; font-family: 'VisbyRoundCF-DemiBold' !important; }
@@ -141,9 +146,10 @@ const ChatsPage = () => {
         .ce-their-message-sender-username { color: #999 !important; }
         .ce-message-file { background-color: #434758 !important; color: #c5c5c5 !important; border-radius: 8px !important; }
         .ce-message-image { background-color: #434758 !important; color: #c5c5c5 !important; border-radius: 8px !important; padding: 0px !important; max-width: 124px !important; max-height: 124px !important; }
+
+        .ce-mobile-chat-list-button { top: 74px !important; left: 0px !important; }
+        .ce-mobile-chat-settings-button { display: none !important; }
         `}</style>
-        </div>
-      </div>
     </div>
   );
 };

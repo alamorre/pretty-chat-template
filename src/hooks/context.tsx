@@ -1,17 +1,9 @@
 import { useState, createContext, ReactNode } from "react";
-
-export interface User {
-  first_name: string;
-  last_name: string;
-  username: string;
-  email: string;
-  secret: string;
-  avatar?: File | string;
-}
+import { PersonObject } from "react-chat-engine-advanced";
 
 export interface ContextInterface {
-  user: User | undefined;
-  setUser: (u: User | undefined) => void;
+  user: PersonObject | undefined;
+  setUser: (u: PersonObject | undefined) => void;
 }
 
 interface ProviderProps {
@@ -25,7 +17,7 @@ export const Context = createContext<ContextInterface>({
 
 export const ContextProvider = (props: ProviderProps) => {
   // TODO: Switch default back to (undefined)
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<PersonObject | undefined>(undefined);
 
   const value = {
     user,
