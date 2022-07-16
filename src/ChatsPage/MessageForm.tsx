@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { CaretUpFilled } from "@ant-design/icons";
 
 import { MessageObject, MessageFormProps } from "react-chat-engine-advanced";
 
 import { nowTimeStamp } from "../hooks/dates";
+import { Context } from "../hooks/context";
 
 const MessageForm = (props: MessageFormProps) => {
   const [text, setText] = useState<string>("");
+  const { user } = useContext(Context);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -15,12 +17,15 @@ const MessageForm = (props: MessageFormProps) => {
     if (text.trim().length === 0) {
       return;
     }
+    if (!user || user.email === null) {
+      return;
+    }
 
     setText("");
 
     const message: MessageObject = {
       text: text,
-      sender_username: "adam@lamorre.co",
+      sender_username: user.email,
       created: nowTimeStamp(),
       custom_json: {},
       attachments: [],

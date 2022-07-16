@@ -4,6 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./assets/VisbyRoundCF-Regular.woff";
 import "./index.css";
+import "./theme.css";
 
 import { ContextProvider } from "./hooks/context";
 
