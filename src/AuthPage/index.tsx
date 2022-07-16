@@ -12,8 +12,8 @@ const AuthPage = () => {
   } as CSSProperties;
 
   return (
-    <div style={{ ...backgroundImage, ...styles.backgroundImageStyle }}>
-      <div style={styles.backgroundGradientStyle}>
+    <div className="background-image" style={backgroundImage}>
+      <div className="background-gradient-dark">
         <div style={styles.formContainerStyle}>
           <div style={styles.titleStyle}>Pretty</div>
 
@@ -29,20 +29,6 @@ const AuthPage = () => {
 };
 
 const styles = {
-  backgroundImageStyle: {
-    width: "100vw",
-    height: "100vh",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-  } as CSSProperties,
-  backgroundGradientStyle: {
-    width: "100vw",
-    height: "100%",
-    overflowY: "scroll",
-    // Built with https://cssgradient.io/
-    background:
-      "linear-gradient(66deg, rgb(40,43,54) 0%, rgb(40,43,54) 50%, rgba(40,43,54,0.8) 100%)",
-  } as CSSProperties,
   formContainerStyle: {
     width: "100%",
     maxWidth: "650px",

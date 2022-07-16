@@ -131,10 +131,6 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
       )}
 
       <style>{`
-      .ce-custom-chat-header { display: inline-block; position: relative; width: 100%; height: 86px; }
-      .ce-custom-header-text { display: inline-block; max-width: 50%; padding-left: 14px; position: relative; top: 21px; }
-      .ce-custom-header-title { color: white; fontSize: 13px; fontFamily: VisbyRoundCF-DemiBold; }
-      .ce-custom-header-subtitle { color: rgb(153, 153, 153); font-size: 11px; }
       .ce-custom-header-avatar { display: inline-block; position: relative; top: 28px; margin-left: ${
         isMobile ? "48px" : "12px"
       }; border: 1px solid ${
@@ -144,9 +140,6 @@ const ChatHeader = (props: CustomChatHeaderProps) => {
           ? "rgb(24 144 255 / 35%)"
           : "rgb(245 34 45 / 35%)"
       } 0px 2px 7px; width: 38px !important; height: 38px !important; font-size: 14px !important; transition: all 0.66s ease; }
-      .ce-custom-header-icon-wrapper { display: inline-block; maxWidth: 50%; position: relative; top: 36px; float: right;  }
-      .ce-custom-header-icon { margin-right: 12px; cursor: pointer; color: rgb(153, 153, 153); transition: all 0.66s ease; }
-      .ce-custom-header-icon:hover { color: rgb(24, 144, 255) !important; }
       `}</style>
     </div>
   );
