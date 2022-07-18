@@ -6,7 +6,7 @@ export interface ContextInterface {
   setUser: (u: PersonObject | undefined) => void;
 }
 
-interface ProviderProps {
+interface ProviderInterface {
   children: ReactNode;
 }
 
@@ -15,14 +15,9 @@ export const Context = createContext<ContextInterface>({
   setUser: () => {},
 });
 
-export const ContextProvider = (props: ProviderProps) => {
-  // TODO: Switch default back to (undefined)
+export const ContextProvider = (props: ProviderInterface) => {
   const [user, setUser] = useState<PersonObject | undefined>(undefined);
-
-  const value = {
-    user,
-    setUser,
-  };
+  const value = { user, setUser };
 
   return <Context.Provider value={value}>{props.children}</Context.Provider>;
 };
